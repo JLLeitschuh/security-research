@@ -13,6 +13,10 @@ Here are the examples of your codebase's use of an insecure PRNG in security-sen
  -
  -
 
+## Impact
+
+Since your codebase leverages an insecure/factorable source of randomness, [DESCRIBE IMPACT IN THIS CONTEXT].
+
 ## Proof Of Concepts Already Exist
 There has already been a POC of taking one RNG value generated RandomStringUtils and reversing it to generate all of the past/future RNG values public since March 3rd, 2018.
 
