@@ -15,6 +15,13 @@ The goal of this repository is to invert the relationship. I create advisories, 
 Should the maintainer wish to move the discussion/fix/disclosure to a GitHub Security Advisory against their own repository, I'm happy to do that.
 However, this channel provides an easy way for me to enforce my disclosure policy in a consistent and fair way.
 
+## Process
+
+1. When a vulnerability is uncovered, that vulnerabilitiy is written up as a [GHSA here](https://github.com/JLLeitschuh/security-research/security/advisories). This advisory is written for public consumption and communicates both the impact of the vulnerability and the source locations impacted.
+2. An attempt to contact the maintainer is made. The maintainer is invited to the newly created GHSA via email or other communication channel. The intial contact contains a high-level description of the vulnerability but no more. Disclosure and communication about the vulnerability happens via GHSA. If the maintainer would like to open a GHSA against their own GitHub repository, this is also acceptable and the contents of the original GHSA will be coppied over.
+3. Collaboration on the GHSA between myself and the maintainer over the disclosure occurs.
+4. Disclosure occurs when the disclosure conditions are met, either from the maintainers GHSA or the original GHSA.
+
 ## My Disclosure Policy
 
 **My vulnerability disclosure follows Google's [90-day vulnerability disclosure policy](https://www.google.com/about/appsecurity/) (I'm not an employee of Google, I just like their policy). Full disclosure will occur either at the end of the 90-day deadline or whenever a patch is made widely available, whichever occurs first.**
