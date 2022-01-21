@@ -18,8 +18,8 @@ However, this channel provides an easy way for me to enforce my disclosure polic
 ## Process
 
 1. When a vulnerability is uncovered, that vulnerabilitiy is written up as a [GHSA here](https://github.com/JLLeitschuh/security-research/security/advisories). This advisory is written for public consumption and communicates both the impact of the vulnerability and the source locations impacted.
-2. An attempt to contact the maintainer is made. The maintainer is invited to the newly created GHSA via email or other communication channel. The intial contact contains a high-level description of the vulnerability but no more. Disclosure and communication about the vulnerability happens via GHSA. If the maintainer would like to open a GHSA against their own GitHub repository, this is also acceptable and the contents of the original GHSA will be coppied over.
-3. Collaboration on the GHSA between myself and the maintainer over the disclosure occurs.
+2. An attempt to contact the maintainer is made via email or other communication channel (eg. HackerOne, BugCrowd, Twitter, ect...). The maintainer is invited to the newly created GHSA. The intial contact contains a high-level description of the vulnerability but no more. Disclosure and communication about the vulnerability happens via GHSA. If the maintainer would like to open a GHSA against their own GitHub repository, this is also acceptable and the contents of the original GHSA will be coppied over.
+3. Collaboration on the GHSA between myself and the maintainer over the disclosure contents occurs via the GHSA.
 4. Disclosure occurs when the disclosure conditions are met, either from the maintainers GHSA or the original GHSA.
 
 ## My Disclosure Policy
