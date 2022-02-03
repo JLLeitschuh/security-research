@@ -17,16 +17,16 @@ These vulnerabilities disclose the contents of those files to other users on the
 ### Vulnerability Examples
 
 ```java
-File tempVuln = File.createTempFile("random", "file");
+File tempVuln = File.createTempFile("random", "file"); // File has permissions `-rw-r--r--`
 // temVuln contents are viewable by all other users
 ```
 ```java
-File tempVuln = File.createTempFile("random", "file", null);
+File tempVuln = File.createTempFile("random", "file", null); // File has permissions `-rw-r--r--`
 // temVuln contents are viewable by all other users
 ```
 ```java
 File tempDir = new File(System.getProperty("java.io.tmpdir"));
-File tempVuln = File.createTempFile("random", "file", tempDir);
+File tempVuln = File.createTempFile("random", "file", tempDir); // File has permissions `-rw-r--r--`
 // temVuln contents are viewable by all other users
 ```
 ```java
@@ -53,25 +53,25 @@ But the contents of this directory can be read by all other local users on the s
 ### Vulnerability Examples
 
 ```java
-File tempDirVuln = com.google.common.io.Files.createTempDir();
+File tempDirVuln = com.google.common.io.Files.createTempDir(); // Directory has permissions `drwxr-xr-x`
 // tempDirVuln any contents of this directory written is visible to all other users
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child");
-if (!tempDirChildVuln.mkdir()) {
-    throw new IOException("Failed to create temporary directory: " + tempDirChildVuln);
+if (!tempDirChildVuln.mkdir()) { // Directory has permissions `drwxr-xr-x`
+    throw new FileAlreadyExistsException(tempDirChildVuln);
 }
 // tempDirChildVuln any contents of this directory written is visible to all other users
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child");
-if (!tempDirChildVuln.mkdirs()) {
-    throw new IOException("Failed to create temporary directory: " + tempDirChildVuln);
+if (!tempDirChildVuln.mkdirs()) { // Directory `child` has permissions `drwxr-xr-x`
+    throw new FileAlreadyExistsException(tempDirChildVuln);
 }
 // tempDirChildVuln any contents of this directory written is visible to all other users
 ```
 ```java
 // TODO: CHECK THIS ONE
 File tempDirChild = new File(System.getProperty("java.io.tmpdir"), "/child-create-directory");
-Files.createDirectory(tempDirChild.toPath()); // Creates with permissions 'drwxr-xr-x'
+Files.createDirectory(tempDirChild.toPath()); // Directory has permissions `drwxr-xr-x`. Throws `FileAlreadyExistsException` if it already exists.
 ```
