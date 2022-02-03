@@ -31,17 +31,17 @@ File tempVuln = File.createTempFile("random", "file", tempDir); // File has perm
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child.txt");
-Files.write(tempDirChildVuln.toPath(), Arrays.asList("secret"), StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+Files.write(tempDirChildVuln.toPath(), Arrays.asList("secret"), StandardCharsets.UTF_8, StandardOpenOption.CREATE); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
 // tempDirChildVuln contents are viewable by all other users
 ```
 ```java
 Path tempDirChild = new File(System.getProperty("java.io.tmpdir"), "/child-output-stream.txt").toPath();
-var fileOutputStream = Files.newOutputStream(tempDirChild);
+var fileOutputStream = Files.newOutputStream(tempDirChild); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
 // Anything written to fileOutputStream is viewable by all other users
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child-create-file.txt");
-Files.createFile(tempDirChildVuln.toPath());
+Files.createFile(tempDirChildVuln.toPath()); // File has permissions `-rw-r--r--`. Throws `FileAlreadyExistsException` if it already exists.
 // tempDirChildVuln contents are viewable by all other users
 ```
 
