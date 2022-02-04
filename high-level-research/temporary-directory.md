@@ -4,13 +4,29 @@
 
 This vulnerability has the highest impact when it comes to vulnerabilities surrounding the Java temp directory.
 
-### Example 1
+### Vunlerability Examples
+
+```java
 
 ```
 
+## 2. Tempoarry File Hijacking
+
+### Vulnerabity Examples
+
+```java
+File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child.txt");
+Files.write(tempDirChildVuln.toPath(), Arrays.asList("secret"), StandardCharsets.UTF_8, StandardOpenOption.CREATE); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
+// tempDirChildVuln contents are viewable by all other users
 ```
 
-## 2. Temporary File Information Disclosure
+```java
+Path tempDirChild = new File(System.getProperty("java.io.tmpdir"), "/child-output-stream.txt").toPath();
+var fileOutputStream = Files.newOutputStream(tempDirChild); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
+// Anything written to fileOutputStream is viewable by all other users
+```
+
+## 3. Temporary File Information Disclosure
 
 These vulnerabilities disclose the contents of those files to other users on the system.
 
@@ -31,13 +47,8 @@ File tempVuln = File.createTempFile("random", "file", tempDir); // File has perm
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child.txt");
-Files.write(tempDirChildVuln.toPath(), Arrays.asList("secret"), StandardCharsets.UTF_8, StandardOpenOption.CREATE); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
+Files.write(tempDirChildVuln.toPath(), Arrays.asList("secret"), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW); // File has permissions `-rw-r--r--`. Throws `FileAlreadyExistsException` if it already exists.
 // tempDirChildVuln contents are viewable by all other users
-```
-```java
-Path tempDirChild = new File(System.getProperty("java.io.tmpdir"), "/child-output-stream.txt").toPath();
-var fileOutputStream = Files.newOutputStream(tempDirChild); // File has permissions `-rw-r--r--`. Doesn't check if the file already exists.
-// Anything written to fileOutputStream is viewable by all other users
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child-create-file.txt");
@@ -45,7 +56,7 @@ Files.createFile(tempDirChildVuln.toPath()); // File has permissions `-rw-r--r--
 // tempDirChildVuln contents are viewable by all other users
 ```
 
-## 3. Temporary Directory Information Disclosure
+## 4. Temporary Directory Information Disclosure
 
 These vulnerabilities don't allow for the hijacking of the temporary directory being created.
 But the contents of this directory can be read by all other local users on the system.
