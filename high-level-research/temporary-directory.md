@@ -12,7 +12,7 @@ tmpDir = File.createTempFile(temp, ".dir", parent); // Attacker knows the full p
 tmpDir.delete(); // Attacker sees file is deleted and begins a race to create their own directory before Jetty.
 // and make a directory of the same name
 // SECURITY VULNERABILITY: Race Condition! - Attacker beats java code and now owns this directory
-tmpDir.mkdirs();
+tmpDir.mkdirs(); // This method returns 'false' because it was unable to create the directory. No exception is thrown.
 // Attacker can write any new files to this directory that they wish.
 // Attacker can read any files created by this process.
 ```
