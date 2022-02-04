@@ -1,5 +1,14 @@
 # Java Vulnerabilities Involving the System Temporary Directory
 
+### Prerequisites
+
+This vulnerability impacts Unix-like systems, and very old versions of Mac OSX and Windows as they all share the system temporary directory between all users.
+
+### Workarounds
+
+Setting the `java.io.tmpdir` system environment variable to a directory that is exclusively owned by the executing user will fix this vulnerability for all operating systems.
+
+
 ## 1. Temporary Directory Hijacking
 
 This vulnerability has the highest impact when it comes to vulnerabilities surrounding the Java temp directory.
