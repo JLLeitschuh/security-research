@@ -15,7 +15,7 @@ The goal of this repository is to invert the relationship. I create advisories, 
 Should the maintainer wish to move the discussion/fix/disclosure to a GitHub Security Advisory against their own repository, I'm happy to do that.
 However, this channel provides an easy way for me to enforce my disclosure policy in a consistent and fair way.
 
-## Process
+## Coordinated Disclosure Process
 
 1. When a vulnerability is uncovered, that vulnerability is written up as a [GHSA here](https://github.com/JLLeitschuh/security-research/security/advisories). This advisory is written for public consumption and communicates both the impact of the vulnerability and the source locations impacted.
 2. An attempt to contact the maintainer is made via email or other communication channel (eg. HackerOne, BugCrowd, Twitter, ect...). The maintainer is invited to the newly created GHSA. The initial contact contains a high-level description of the vulnerability but no more. Disclosure and communication about the vulnerability happens via GHSA. If the maintainer would like to open a GHSA against their own GitHub repository, this is also acceptable and the contents of the original GHSA will be copied over.
