@@ -1,5 +1,7 @@
 # Java Vulnerabilities Involving the System Temporary Directory
 
+On unix like systems, the system's temporary directory is shared between all users on that system. As such, files written to that directory without setting the correct file permissions can allow other users on that system to view the contents of the files written to those temporary files.
+
 ### Prerequisites
 
 This vulnerability impacts Unix-like systems, and very old versions of Mac OSX and Windows as they all share the system temporary directory between all users.
