@@ -28,7 +28,7 @@ tmpDir.mkdirs(); // This method returns 'false' because it was unable to create 
 // Attacker can read any files created by this process.
 ```
 
-## 2. Tempoarry File Hijacking
+## 2. Temporary File Hijacking
 
 ### Vulnerabity Examples
 
