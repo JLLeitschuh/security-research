@@ -30,6 +30,8 @@ tmpDir.mkdirs(); // This method returns 'false' because it was unable to create 
 
 ### Fix
 
+The `Files.createTempDirectory` API creates a temporary directory that has the corret posix permissions on unix-like systems.
+
 ```java
 tempDir = Files.createTempDirectory("temp.dir", parent.toPath()).toFile()
 ```
