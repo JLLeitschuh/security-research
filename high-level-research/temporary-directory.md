@@ -20,8 +20,8 @@ This vulnerability has the highest impact when it comes to vulnerabilities surro
 ```java
 tmpDir = File.createTempFile(temp, ".dir", parent); // Attacker knows the full path of the file that will be generated
 // delete the file that was created
-tmpDir.delete(); // Attacker sees file is deleted and begins a race to create their own directory before Jetty.
-// and make a directory of the same name
+tmpDir.delete(); // Attacker sees file is deleted and begins a race to create their own directory before the java code.
+// and makes a directory of the same name
 // SECURITY VULNERABILITY: Race Condition! - Attacker beats java code and now owns this directory
 tmpDir.mkdirs(); // This method returns 'false' because it was unable to create the directory. No exception is thrown.
 // Attacker can write any new files to this directory that they wish.
