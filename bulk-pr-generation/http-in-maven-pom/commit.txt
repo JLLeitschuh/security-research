@@ -1,4 +1,4 @@
-vuln-fix: Use HTTPS instead of HTTP to resolve dependencies CVE-2021-26291
+vuln-fix: Use HTTPS instead of HTTP to resolve deps CVE-2021-26291
 
 This fixes a security vulnerability in this project where the `pom.xml`
 files were configuring Maven to resolve dependencies over HTTP instead of
