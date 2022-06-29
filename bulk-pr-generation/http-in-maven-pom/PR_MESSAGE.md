@@ -42,7 +42,7 @@ If you'd like to opt-out of future automated security vulnerability fixes like t
 `.github/GH-ROBOTS.txt` to your repository with the line:
 
 ```
-User-agent: Moderne/Moderne
+User-agent: JLLeitschuh/security-research
 Disallow: *
 ```
 
