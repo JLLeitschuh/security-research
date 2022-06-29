@@ -26,7 +26,7 @@ This vulnerability was automatically detected by [LGTM.com](https://lgtm.com) us
 
 As of September 2019 LGTM.com and Semmle are [officially a part of GitHub](https://github.blog/2019-09-18-github-welcomes-semmle/).
 
-You can automatically detect future vulnerabilities like this by enabling the free (for open-source) [GitHub Action]([https://github.com/marketplace/lgtm](https://github.com/github/codeql-action)).
+You can automatically detect future vulnerabilities like this by enabling the free (for open-source) [GitHub Action](https://github.com/github/codeql-action).
 
 I'm not an employee of GitHub nor of Semmle, I'm simply an open-source security researcher.
 
