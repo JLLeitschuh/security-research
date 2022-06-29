@@ -1,0 +1,7 @@
+Use HTTPS instead of HTTP to resolve dependencies
+        
+This fixes a security vulnerability in this project where the `pom.xml`
+files were configuring Maven to resolve dependencies over HTTP instead of
+HTTPS.
+        
+Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
