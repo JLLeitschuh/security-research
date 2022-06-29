@@ -34,7 +34,7 @@ I'm not an employee of GitHub nor of Semmle, I'm simply an open-source security 
 Yes, this contribution was automatically generated, however, the code to generate this PR was lovingly hand crafted to bring this security fix to your repository.
 
 The source code that generated and submitted this PR can be found here:
-[openrewrite/rewrite]([https://github.com/JLLeitschuh/bulk-security-pr-generator]([https://github.com/openrewrite/rewrite/blob/f8c139d0d66ad9a60ee73b95b7a79571e4820769/rewrite-gradle/src/main/java/org/openrewrite/gradle/security/UseHttpsForRepositories.java](https://github.com/openrewrite/rewrite/blob/f8c139d0d66ad9a60ee73b95b7a79571e4820769/rewrite-maven/src/main/java/org/openrewrite/maven/security/UseHttpsForRepositories.java)))
+[openrewrite/rewrite](https://github.com/openrewrite/rewrite/blob/f8c139d0d66ad9a60ee73b95b7a79571e4820769/rewrite-maven/src/main/java/org/openrewrite/maven/security/UseHttpsForRepositories.java)
 
 ## Opting-Out
 
