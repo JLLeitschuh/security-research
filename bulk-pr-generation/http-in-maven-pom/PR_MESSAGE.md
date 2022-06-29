@@ -2,13 +2,9 @@
 
 [![mitm_build](https://user-images.githubusercontent.com/1323708/59226671-90645200-8ba1-11e9-8ab3-39292bef99e9.jpeg)](https://medium.com/@jonathan.leitschuh/want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-1fc329d898fb?source=friends_link&sk=3c99970c55a899ad9ef41f126efcde0e)
 
-- [Want to take over the Java ecosystem? All you need is a MITM!](https://medium.com/@jonathan.leitschuh/want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-1fc329d898fb?source=friends_link&sk=3c99970c55a899ad9ef41f126efcde0e)
-- [Update: Want to take over the Java ecosystem? All you need is a MITM!](https://medium.com/bugbountywriteup/update-want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-d069d253fe23?source=friends_link&sk=8c8e52a7d57b98d0b7e541665688b454)
-- [CVE-2021-26291](https://nvd.nist.gov/vuln/detail/CVE-2021-26291)
-
 ---
 
-This is a security fix for a  vulnerability in your [Apache Maven](https://maven.apache.org/) `pom.xml` file(s).
+This is a security fix for a high severity vulnerability in your [Apache Maven](https://maven.apache.org/) `pom.xml` file(s).
 
 The build files indicate that this project is resolving dependencies over HTTP instead of HTTPS.
 This leaves your build vulnerable to allowing a [Man in the Middle](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) (MITM) attackers to execute arbitrary code on your or your computer or CI/CD system.
@@ -20,15 +16,19 @@ MITM attacks against HTTP are [increasingly common](https://security.stackexchan
 
 This contribution is a part of a submission to the [GitHub Security Lab](https://securitylab.github.com/) Bug Bounty program.
 
+## Resources
+
+- [Want to take over the Java ecosystem? All you need is a MITM!](https://medium.com/@jonathan.leitschuh/want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-1fc329d898fb?source=friends_link&sk=3c99970c55a899ad9ef41f126efcde0e)
+- [Update: Want to take over the Java ecosystem? All you need is a MITM!](https://medium.com/bugbountywriteup/update-want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-d069d253fe23?source=friends_link&sk=8c8e52a7d57b98d0b7e541665688b454)
+- [CVE-2021-26291](https://nvd.nist.gov/vuln/detail/CVE-2021-26291)
+
 ## Detecting this and Future Vulnerabilities
 
-This vulnerability was automatically detected by [LGTM.com](https://lgtm.com) using this [CodeQL Query](https://lgtm.com/rules/1511115648721/).
-
-As of September 2019 LGTM.com and Semmle are [officially a part of GitHub](https://github.blog/2019-09-18-github-welcomes-semmle/).
+This vulnerability was automatically detected by GitHub's [LGTM.com](https://lgtm.com) using this [CodeQL Query](https://lgtm.com/rules/1511115648721/).
 
 You can automatically detect future vulnerabilities like this by enabling the free (for open-source) [GitHub Action](https://github.com/github/codeql-action).
 
-I'm not an employee of GitHub nor of Semmle, I'm simply an open-source security researcher.
+I'm not an employee of GitHub, I'm simply an open-source security researcher.
 
 ## Source
 
