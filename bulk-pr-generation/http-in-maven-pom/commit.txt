@@ -7,7 +7,7 @@ HTTPS.
 Weakness: CWE-829: Inclusion of Functionality from Untrusted Control Sphere
 Severity: High
 CVSSS: 8.1
-Detection: CodeQL & OpenRewrite
+Detection: CodeQL & OpenRewrite (https://public.moderne.io/recipes/org.openrewrite.maven.security.UseHttpsForRepositories)
 
 Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
 Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
