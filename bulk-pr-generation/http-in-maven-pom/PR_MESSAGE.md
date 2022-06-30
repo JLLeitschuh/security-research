@@ -32,10 +32,10 @@ I'm not an employee of GitHub, I'm simply an open-source security researcher.
 
 ## Source
 
-Yes, this contribution was automatically generated, however, the code to generate this PR was lovingly hand crafted to bring this security fix to your repository.
+This contribution was automatically generated with an [OpenRewrite](https://github.com/openrewrite/rewrite) [refactoring recipe](https://docs.openrewrite.org/), which was lovingly hand crafted to bring this security fix to your repository.
 
-The source code that generated and submitted this PR can be found here:
-[openrewrite/rewrite](https://github.com/openrewrite/rewrite/blob/f8c139d0d66ad9a60ee73b95b7a79571e4820769/rewrite-maven/src/main/java/org/openrewrite/maven/security/UseHttpsForRepositories.java)
+The source code that generated this PR can be found here:
+[UseHttpsForRepositories](https://github.com/openrewrite/rewrite/blob/f8c139d0d66ad9a60ee73b95b7a79571e4820769/rewrite-maven/src/main/java/org/openrewrite/maven/security/UseHttpsForRepositories.java)
 
 ## Opting-Out
 
