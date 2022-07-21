@@ -12,4 +12,4 @@ Detection: OpenRewrite
 Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
 Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
 
-Bug-tracker: TODO!
+Bug-tracker: https://github.com/JLLeitschuh/security-research/issues/9
