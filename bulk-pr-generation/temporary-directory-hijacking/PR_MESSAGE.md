@@ -50,6 +50,16 @@ if (!tmpDir.mkdirs()) { // Guard correctly prevents temporary directory hijackin
  - [CVE-2022-24823](https://github.com/advisories/GHSA-5mcr-gq6c-3hq2) - netty/netty
  - [CVE-2022-24823](https://github.com/advisories/GHSA-269q-hmxg-m83q) - netty/netty
 
+# The Fix
+
+The fix has been to convert the logic above to use the following API that was introduced in Java 1.7.
+
+```java
+File tmpDir = Files.createTempDirectory("temp dir").toFile();
+```
+
+The API both created the directory securely, ie with a random, non-conflicting name, with directory permissions that only allow the currently executing user to read or write the contents of this directory.
+
 # ▶️ Vulnerability Disclosure ◀️
 
 👋 Vulnerability disclosure is a super important part of the vulnerability handling process and should not be skipped! This may be completely new to you, and that's okay, I'm here to assist!
