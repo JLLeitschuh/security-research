@@ -49,3 +49,19 @@ if (!tmpDir.mkdirs()) { // Guard correctly prevents temporary directory hijackin
  - [CVE-2021-21364](https://github.com/advisories/GHSA-hpv8-9rq5-hq7w) - swagger-api/swagger-codegen
  - [CVE-2022-24823](https://github.com/advisories/GHSA-5mcr-gq6c-3hq2) - netty/netty
  - [CVE-2022-24823](https://github.com/advisories/GHSA-269q-hmxg-m83q) - netty/netty
+
+# ▶️ Vulnerability Disclosure ◀️
+
+👋 Vulnerability disclosure is a super important part of the vulnerability handling process and should not be skipped! This may be completely new to you, and that's okay, I'm here to assist!
+
+First question, do we need to perform vulnerability disclosure? It depends!
+
+ 1. Is the vulnerable code only in tests or example code? No disclosure required!
+ 2. Is the vulnerable code in code shipped to your end users? Vulnerability disclosure is probably required!
+
+## Vulnerability Disclosure How-To
+
+You have a few options options to perform vulnerability disclosure. However, I'd like to suggest the following 2 options:
+
+ 1. Request a CVE number from GitHub by creating a repository-level [GitHub Security Advisory](https://docs.github.com/en/code-security/repository-security-advisories/creating-a-repository-security-advisory). This has the advantage that, if you provide sufficient information, GitHub will automatically generate Dependabot alerts for your downstream consumers, resolving this vulnerability more quickly.
+ 2. Reach out to the team at Snyk to assist with CVE issuance. They can be reached at the [Snyk's Disclosure Email](mailto:report@snyk.io).
