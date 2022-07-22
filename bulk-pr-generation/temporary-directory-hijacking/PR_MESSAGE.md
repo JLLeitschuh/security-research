@@ -13,7 +13,7 @@ This PR was generated because the following chain of calls was detected in this 
 
 ## Temporary Directory Hijacking
 
-This vulnerability exists because the return value from `file.mkdir()` or `file.mkdirs()` is not checked to determine if the call sucseeded. Say, for example, because another local user created the directory before this process.
+This vulnerability exists because the return value from `file.mkdir()` or `file.mkdirs()` is not checked to determine if the call succeeded. Say, for example, because another local user created the directory before this process.
 
 ```java
 File tmpDir = File.createTempFile("temp", ".dir"); // Attacker knows the full path of the directory that will be later created
