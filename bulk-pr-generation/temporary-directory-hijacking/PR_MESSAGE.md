@@ -23,7 +23,7 @@ tmpDir.delete(); // Attacker sees file is deleted and begins a race to create th
 // 🏁 SECURITY VULNERABILITY: Race Condition! - Attacker beats java code and now owns this directory
 tmpDir.mkdirs(); // This method returns 'false' because it was unable to create the directory. No exception is thrown.
 // Attacker can write any new files to this directory that they wish.
-// Attacker can read any files created by this process.
+// Attacker can read any files created within this directory.
 ```
 
 ### Other Examples
