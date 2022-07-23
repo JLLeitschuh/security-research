@@ -11,6 +11,13 @@ The system temporary directory is shared between all users on most unix-like sys
 This PR was generated because the following chain of calls was detected in this repository in a way that leaves this project vulnerable.
 `File.createTempFile(..)` -> `file.delete()` -> either `file.mkdir()` or `file.mkdirs()`.
 
+### Impact
+
+This vulnerability can have one of two impacts depending upon which vulnerability it is.
+
+ 1. Temporary Directory Information Disclosure - Information in this directory is visable to other local users, allowing a malicious actor co-resident on the same machine to view potentially sensitive files.
+ 2. Temporary Directory Hijacking Vulnerability - Same impact as 1. above, but also, ther local users can manipulate/add contents to this directory. If code is being executed out of this temporary directory, it can lead to local priviledge escalation.
+
 ## Temporary Directory Hijacking
 
 This vulnerability exists because the return value from `file.mkdir()` or `file.mkdirs()` is not checked to determine if the call succeeded. Say, for example, because another local user created the directory before this process.
