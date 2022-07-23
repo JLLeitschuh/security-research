@@ -1,0 +1,13 @@
+vuln-fix: Temporary Directory Hijacking or Information Disclosure
+
+This fixes either Temporary Directory Hijacking, or Temporary Directory Local Information Disclosure.
+
+Weakness: CWE-379: Creation of Temporary File in Directory with Insecure Permissions
+Severity: Medium
+CVSSS: 8.1
+Detection: CodeQL & OpenRewrite (https://public.moderne.io/recipes/org.openrewrite.java.security.UseFilesCreateTempDirectory)
+
+Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+
+Bug-tracker: TODO
