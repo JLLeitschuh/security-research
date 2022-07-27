@@ -67,9 +67,9 @@ File tmpDir = Files.createTempDirectory("temp dir").toFile();
 
 The API both created the directory securely, ie with a random, non-conflicting name, with directory permissions that only allow the currently executing user to read or write the contents of this directory.
 
-# ▶️ Vulnerability Disclosure ◀️
+# :arrow_right: Vulnerability Disclosure :arrow_left:
 
-👋 Vulnerability disclosure is a super important part of the vulnerability handling process and should not be skipped! This may be completely new to you, and that's okay, I'm here to assist!
+:wave: Vulnerability disclosure is a super important part of the vulnerability handling process and should not be skipped! This may be completely new to you, and that's okay, I'm here to assist!
 
 First question, do we need to perform vulnerability disclosure? It depends!
 
