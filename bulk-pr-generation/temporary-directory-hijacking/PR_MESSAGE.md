@@ -27,7 +27,7 @@ File tmpDir = File.createTempFile("temp", ".dir"); // Attacker knows the full pa
 // delete the file that was created
 tmpDir.delete(); // Attacker sees file is deleted and begins a race to create their own directory before the java code.
 // and makes a directory of the same name
-// 🏁 SECURITY VULNERABILITY: Race Condition! - Attacker beats java code and now owns this directory
+// SECURITY VULNERABILITY: Race Condition! - Attacker beats java code and now owns this directory
 tmpDir.mkdirs(); // This method returns 'false' because it was unable to create the directory. No exception is thrown.
 // Attacker can write any new files to this directory that they wish.
 // Attacker can read any files created within this directory.
