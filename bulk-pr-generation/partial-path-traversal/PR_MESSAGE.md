@@ -6,15 +6,17 @@ This pull request fixes a partial-path traversal vulnerability due to an insuffi
 
 ## Preamble
 
+### Impact
+
+This issue allows a malicious actor to potentially break out of the expected directory. The impact is limited to sibling directories. For example, `userControlled.getCanonicalPath().startsWith("/usr/out")` will allow an attacker to access a directory with a name like `/usr/out-not`. 
+
+### Why?
+
 To demonstrate this vulnerability, consider `"/usr/outnot".startsWith("/usr/out")`.
 The check is bypassed although `/outnot` is not under the `/out` directory.
 It's important to understand that the terminating slash may be removed when using various `String` representations of the `File` object.
 For example, on Linux, `println(new File("/var"))` will print `/var`, but `println(new File("/var", "/")` will print `/var/`;
 however, `println(new File("/var", "/").getCanonicalPath())` will print `/var`.
-
-### Impact
-
-This issue allows a malicious actor to potentially break out of the expected directory. The impact is limited to sibling directories. For example, `userControlled.getCanonicalPath().startsWith("/usr/out")` will allow an attacker to access a directory with a name like `/usr/out-not`. 
 
 ### The Fix
 
