@@ -2,7 +2,7 @@
 
 # Security Vulnerability Fix
 
-This pull request fixes a partial-path traversal vulnerability due to an insufficient path traveral guard.
+This pull request fixes a partial-path traversal vulnerability due to an insufficient path traversal guard.
 
 ## Preamble
 
