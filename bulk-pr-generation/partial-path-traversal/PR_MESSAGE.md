@@ -12,7 +12,7 @@ It's important to understand that the terminating slash may be removed when usin
 For example, on Linux, `println(new File(\"/var\"))` will print `/var`, but `println(new File(\"/var\", \"/\")` will print `/var/`;
 however, `println(new File(\"/var\", \"/\").getCanonicalPath())` will print `/var`.
 
-## Impact
+### Impact
 
 This issue allows a malicious actor to potentially break out of the expected directory.
 
