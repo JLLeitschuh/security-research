@@ -41,7 +41,7 @@ First question, do we need to perform vulnerability disclosure? It depends!
 You have a few options options to perform vulnerability disclosure. However, I'd like to suggest the following 2 options:
 
  1. Request a CVE number from GitHub by creating a repository-level [GitHub Security Advisory](https://docs.github.com/en/code-security/repository-security-advisories/creating-a-repository-security-advisory). This has the advantage that, if you provide sufficient information, GitHub will automatically generate Dependabot alerts for your downstream consumers, resolving this vulnerability more quickly.
- 2. Reach out to the team at Snyk to assist with CVE issuance. They can be reached at the [Snyk's Disclosure Email](mailto:report@snyk.io).
+ 2. Reach out to the team at Snyk to assist with CVE issuance. They can be reached at the [Snyk's Disclosure Email](mailto:report@snyk.io). Note: Please include `JLLeitschuh Disclosure` in the subject of your email so it is not missed.
 
 ## Detecting this and Future Vulnerabilities
 
