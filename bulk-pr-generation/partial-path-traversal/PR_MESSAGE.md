@@ -1,4 +1,4 @@
-[SECURITY] Fix Temporary Directory Hijacking or Information Disclosure Vulnerability
+[SECURITY] Fix Partial Path Traversal Vulnerability
 
 # Security Vulnerability Fix
 
