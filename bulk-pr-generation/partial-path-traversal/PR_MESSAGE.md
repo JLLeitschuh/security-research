@@ -9,7 +9,7 @@ This pull request fixes a partial-path traversal vulnerability due to an insuffi
 To demonstrate this vulnerability, consider `"/usr/outnot".startsWith("/usr/out")`.
 The check is bypassed although `/outnot` is not under the `/out` directory.
 It's important to understand that the terminating slash may be removed when using various `String` representations of the `File` object.
-For example, on Linux, `println(new File(\"/var\"))` will print `/var`, but `println(new File("/var\", "/")` will print `/var/`;
+For example, on Linux, `println(new File("/var"))` will print `/var`, but `println(new File("/var", "/")` will print `/var/`;
 however, `println(new File("/var", "/").getCanonicalPath())` will print `/var`.
 
 ### Impact
