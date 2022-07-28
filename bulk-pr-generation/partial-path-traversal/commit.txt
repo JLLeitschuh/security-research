@@ -1,6 +1,6 @@
 vuln-fix: Partial Path Traversal Vulnerability
 
-This fixes a partil path traversal vulnerability.
+This fixes a partial path traversal vulnerability.
 
 Replaces `dir.getCanonicalPath().startsWith(parent.getCanonicalPath())`, which is vulnerable to partial path traversal attacks, with the more secure `dir.getCanonicalFile().toPath().startsWith(parent.getCanonicalFile().toPath())`.
 
