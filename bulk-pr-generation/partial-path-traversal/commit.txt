@@ -2,7 +2,7 @@ vuln-fix: Partial Path Traversal Vulnerability
 
 This fixes a partil path traversal vulnerability.
 
-Replaces `dir.getCanonicalPath().startsWith(parent.getCanonicalPath()`, which is vulnerable to partial path traversal attacks, with the more secure `dir.getCanonicalFile().toPath().startsWith(parent.getCanonicalFile().toPath())`.
+Replaces `dir.getCanonicalPath().startsWith(parent.getCanonicalPath())`, which is vulnerable to partial path traversal attacks, with the more secure `dir.getCanonicalFile().toPath().startsWith(parent.getCanonicalFile().toPath())`.
 
 To demonstrate this vulnerability, consider `"/usr/outnot".startsWith("/usr/out")`.
 The check is bypassed although `/outnot` is not under the `/out` directory.
