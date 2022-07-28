@@ -8,7 +8,7 @@ This pull request fixes a partial-path traversal vulnerability due to an insuffi
 
 ### Impact
 
-This issue allows a malicious actor to potentially break out of the expected directory. The impact is limited to sibling directories. For example, `userControlled.getCanonicalPath().startsWith("/usr/out")` will allow an attacker to access a directory with a name like `/usr/out-not`. 
+This issue allows a malicious actor to potentially break out of the expected directory. The impact is limited to sibling directories. For example, `userControlled.getCanonicalPath().startsWith("/usr/out")` will allow an attacker to access a directory with a name like `/usr/outnot`. 
 
 ### Why?
 
