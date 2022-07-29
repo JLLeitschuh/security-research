@@ -2,7 +2,7 @@
 
 # Security Vulnerability Fix
 
-This pull request fixes a Zip Slip vulnerability either due to an insuffucient, or missing guard when unzipping zip files.
+This pull request fixes a Zip Slip vulnerability either due to an insufficient, or missing guard when unzipping zip files.
 
 Even if you deem, as the maintainer of this project, this is not necessarily fixing a security vulnerability, it is still, most likely, a valid security hardening.
 
@@ -10,8 +10,8 @@ Even if you deem, as the maintainer of this project, this is not necessarily fix
 
 ### Impact
 
-This issue allows a malicious zip file to potentially break out of the expected desintation directory, writing contents into arbitrary locations on the file system.
-Overwriting certain files/directories could allow an attacker to achive remote code execution on a target system by exploiting this vulnerability.
+This issue allows a malicious zip file to potentially break out of the expected destination directory, writing contents into arbitrary locations on the file system.
+Overwriting certain files/directories could allow an attacker to achieve remote code execution on a target system by exploiting this vulnerability.
 
 ### Why?
 
@@ -29,7 +29,7 @@ however, `println(new File("/var", "/").getCanonicalPath())` will print `/var`.
 
 ### The Fix
 
-Implementing a guard comparing paths with the method `java.nio.files.Path#startsWith` will adequately protect againts this vulnerability.
+Implementing a guard comparing paths with the method `java.nio.files.Path#startsWith` will adequately protect against this vulnerability.
 
 For example: `file.getCanonicalFile().toPath().startsWith(BASE_DIRECTORY)` or `file.getCanonicalFile().toPath().startsWith(BASE_DIRECTORY_FILE.getCanonicalFile().toPath())`
 
@@ -48,7 +48,7 @@ First question, do we need to perform vulnerability disclosure? It depends!
  1. Is the vulnerable code only in tests or example code? No disclosure required!
  2. Is the vulnerable code in code shipped to your end users? Vulnerability disclosure is probably required!
 
-For partial path traversal, consider if user-supplied input could ever flow to this logic. If user supplied input could reach this conditional, it's  insufficient and, as such, most likely a vulnerability.
+For partial path traversal, consider if user-supplied input could ever flow to this logic. If user-supplied input could reach this conditional, it's  insufficient and, as such, most likely a vulnerability.
 
 ## Vulnerability Disclosure How-To
 
@@ -65,7 +65,7 @@ I'm not an employee of GitHub, I'm simply an open-source security researcher.
 
 ## Source
 
-This contribution was automatically generated with an [OpenRewrite](https://github.com/openrewrite/rewrite) [refactoring recipe](https://docs.openrewrite.org/), which was lovingly hand crafted to bring this security fix to your repository.
+This contribution was automatically generated with an [OpenRewrite](https://github.com/openrewrite/rewrite) [refactoring recipe](https://docs.openrewrite.org/), which was lovingly handcrafted to bring this security fix to your repository.
 
 The source code that generated this PR can be found here:
 [Zip Slip](https://github.com/openrewrite/rewrite-java-security/blob/main/src/main/java/org/openrewrite/java/security/ZipSlip.java)
@@ -78,17 +78,17 @@ This is technically what is called a "Full Disclosure" in vulnerability disclosu
 
 The problem is that as an open source software security researcher, I (exactly like open source maintainers), I only have so much time in a day. I'm able to find vulnerabilities impacting hundreds, or sometimes thousands of open source projects with tools like GitHub Code Search and CodeQL. The problem is that my knowledge of vulnerabilities doesn't scale very well.
 
-Individualized vulnerability disclosure takes time and care. It's a long and tedious process, and I have a significant amount of experience with it (I have over 50 CVEs to my name). Even tracking down the reporting channel (email, Jira, ect..) can take time and isn't automatable. Unfortunately, when facing prblems of this scale, individual reporting doesn't work well either.
+Individualized vulnerability disclosure takes time and care. It's a long and tedious process, and I have a significant amount of experience with it (I have over 50 CVEs to my name). Even tracking down the reporting channel (email, Jira, etc..) can take time and isn't automatable. Unfortunately, when facing problems of this scale, individual reporting doesn't work well either.
 
-Additionally, if I just spam out emails or issues, I'll just overwhelm already over taxed maintainers, I don't want to do this either.
+Additionally, if I just spam out emails or issues, I'll just overwhelm already over-taxed maintainers, I don't want to do this either.
 
 By creating a pull request, I am aiming to provide maintainers something highly actionable to actually fix the identified vulnerability; a pull request.
 
 There's a larger discussion on this topic that can be found here:  https://github.com/JLLeitschuh/security-research/discussions/12
 
-## Opting-Out
+## Opting Out
 
-If you'd like to opt-out of future automated security vulnerability fixes like this, please consider adding a file called
+If you'd like to opt out of future automated security vulnerability fixes like this, please consider adding a file called
 `.github/GH-ROBOTS.txt` to your repository with the line:
 
 ```
@@ -104,7 +104,7 @@ Alternatively, if this project is no longer actively maintained, consider [archi
 
 _This section is only relevant if your project requires contributors to sign a Contributor License Agreement (CLA) for external contributions._
 
-It is unlikely that I'll be able to directly sign CLAs. However, all contributed commits are already automatically signed-off.
+It is unlikely that I'll be able to directly sign CLAs. However, all contributed commits are already automatically signed off.
 
 > The meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin 
 > (see [https://developercertificate.org/](https://developercertificate.org/) for more information).
