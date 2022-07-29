@@ -1,0 +1,25 @@
+vuln-fix: Zip Slip Vulnerability
+
+This fixes a Zip-Slip vulnerability.
+
+This change does one of two things. This change either
+
+1. Inserts a guard to protect against Zip Slip.
+OR
+2. Replaces `dir.getCanonicalPath().startsWith(parent.getCanonicalPath())`, which is vulnerable to partial path traversal attacks, with the more secure `dir.getCanonicalFile().toPath().startsWith(parent.getCanonicalFile().toPath())`.
+
+For number 2, consider `"/usr/outnot".startsWith("/usr/out")`.
+The check is bypassed although `/outnot` is not under the `/out` directory.
+It's important to understand that the terminating slash may be removed when using various `String` representations of the `File` object.
+For example, on Linux, `println(new File("/var"))` will print `/var`, but `println(new File("/var", "/")` will print `/var/`;
+however, `println(new File("/var", "/").getCanonicalPath())` will print `/var`.
+
+Weakness: CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+Severity: High
+CVSSS: 7.4
+Detection: CodeQL (https://codeql.github.com/codeql-query-help/java/java-zipslip/) & OpenRewrite (https://public.moderne.io/recipes/org.openrewrite.java.security.ZipSlip)
+
+Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+
+Bug-tracker: https://github.com/JLLeitschuh/security-research/issues/13
