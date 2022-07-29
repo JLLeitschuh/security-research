@@ -62,7 +62,9 @@ The source code that generated this PR can be found here:
 
 ## Why didn't you disclose privately (ie. coordinated disclosure)?
 
-This is technically what is called a "Full Disclosure" in vulnerability disclosure, and I agree it's less than ideal. If GitHub offered a way to create private pull requests to submit pull requests, I'd leverage it, but that infrastructure sadly doesn't exist.
+This PR was automatically generated, in-bulk, and sent to this project as well as many others, all at the same time.
+
+This is technically what is called a "Full Disclosure" in vulnerability disclosure, and I agree it's less than ideal. If GitHub offered a way to create private pull requests to submit pull requests, I'd leverage it, but that infrastructure, sadly, doesn't exist yet.
 
 The problem is that as an open source software security researcher, I (exactly like open source maintainers), I only have so much time in a day. I'm able to find vulnerabilities impacting hundreds, or sometimes thousands of open source projects with tools like GitHub Code Search and CodeQL. The problem is that my knowledge of vulnerabilities doesn't scale very well.
 
@@ -70,7 +72,7 @@ Individualized vulnerability disclosure takes time and care. It's a long and ted
 
 Additionally, if I just spam out emails or issues, I'll just overwhelm already over taxed maintainers, I don't want to do this either.
 
-By creating a pull request, you are providing a maintainer something highly actionable to actually fix the identified vulnerability; the pull request.
+By creating a pull request, I am aiming to provide maintainers something highly actionable to actually fix the identified vulnerability; a pull request.
 
 There's a larger discussion on this topic that can be found here:  https://github.com/JLLeitschuh/security-research/discussions/12
 
