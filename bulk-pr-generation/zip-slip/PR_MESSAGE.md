@@ -68,7 +68,7 @@ I'm not an employee of GitHub, I'm simply an open-source security researcher.
 This contribution was automatically generated with an [OpenRewrite](https://github.com/openrewrite/rewrite) [refactoring recipe](https://docs.openrewrite.org/), which was lovingly hand crafted to bring this security fix to your repository.
 
 The source code that generated this PR can be found here:
-[PartialPathTraversalVulnerability](https://github.com/openrewrite/rewrite-java-security/blob/main/src/main/java/org/openrewrite/java/security/PartialPathTraversalVulnerability.java)
+[Zip Slip](https://github.com/openrewrite/rewrite-java-security/blob/main/src/main/java/org/openrewrite/java/security/ZipSlip.java)
 
 ## Why didn't you disclose privately (ie. coordinated disclosure)?
 
