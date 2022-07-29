@@ -76,7 +76,7 @@ This PR was automatically generated, in-bulk, and sent to this project as well a
 
 This is technically what is called a "Full Disclosure" in vulnerability disclosure, and I agree it's less than ideal. If GitHub offered a way to create private pull requests to submit pull requests, I'd leverage it, but that infrastructure, sadly, doesn't exist yet.
 
-The problem is that as an open source software security researcher, I (exactly like open source maintainers), I only have so much time in a day. I'm able to find vulnerabilities impacting hundreds, or sometimes thousands of open source projects with tools like GitHub Code Search and CodeQL. The problem is that my knowledge of vulnerabilities doesn't scale very well.
+The problem is that, as an open source software security researcher, I (exactly like open source maintainers), I only have so much time in a day. I'm able to find vulnerabilities impacting hundreds, or sometimes thousands of open source projects with tools like GitHub Code Search and CodeQL. The problem is that my knowledge of vulnerabilities doesn't scale very well.
 
 Individualized vulnerability disclosure takes time and care. It's a long and tedious process, and I have a significant amount of experience with it (I have over 50 CVEs to my name). Even tracking down the reporting channel (email, Jira, etc..) can take time and isn't automatable. Unfortunately, when facing problems of this scale, individual reporting doesn't work well either.
 
