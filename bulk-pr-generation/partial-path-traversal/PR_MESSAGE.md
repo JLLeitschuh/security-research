@@ -68,7 +68,7 @@ Individualized vulnerability disclosure takes time and care. It's a long and ted
 
 Additionally, if I just spam out emails or issues, I'll just overwhelm already over taxed maintainers, I don't want to do this either.
 
-By creating a pull request, you are proving a maintainer something highly actionable to actually fix the identified vulnerability. The pull request.
+By creating a pull request, you are providing a maintainer something highly actionable to actually fix the identified vulnerability; the pull request.
 
 There's a larger discussion on this topic that can be found here:  https://github.com/JLLeitschuh/security-research/discussions/12
 
