@@ -22,4 +22,4 @@ Detection: CodeQL (https://codeql.github.com/codeql-query-help/java/java-zipslip
 Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
 Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
 
-Bug-tracker: https://github.com/JLLeitschuh/security-research/issues/13
+Bug-tracker: https://github.com/JLLeitschuh/security-research/issues/16
