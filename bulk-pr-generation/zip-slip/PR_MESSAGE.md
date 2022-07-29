@@ -36,8 +36,8 @@ For example: `file.getCanonicalFile().toPath().startsWith(BASE_DIRECTORY)` or `f
 ### Other Examples
 
  - [CVE-2018-1002201](https://snyk.io/vuln/SNYK-JAVA-ORGZEROTURNAROUND-31681) - zeroturnaround/zt-zip
- - [CVE-2018-1002202](https://snyk.io/vuln/SNYK-JAVA-NETLINGALAZIP4J-31679) - zip4j
- - 
+ - [CVE-2018-1002202](https://snyk.io/vuln/SNYK-JAVA-NETLINGALAZIP4J-31679) - srikanth-lingala/zip4j
+ - [CVE-2018-8009](https://nvd.nist.gov/vuln/detail/CVE-2018-8009) - apache/hadoop
 
 # :arrow_right: Vulnerability Disclosure :arrow_left:
 
