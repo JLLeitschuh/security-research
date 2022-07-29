@@ -40,6 +40,8 @@ First question, do we need to perform vulnerability disclosure? It depends!
  1. Is the vulnerable code only in tests or example code? No disclosure required!
  2. Is the vulnerable code in code shipped to your end users? Vulnerability disclosure is probably required!
 
+For partial path traversal, consider if user-supplied input could ever flow to this logic. If user supplied input could reach this conditional, it's  insufficient and, as such, most likely a vulnerability.
+
 ## Vulnerability Disclosure How-To
 
 You have a few options options to perform vulnerability disclosure. However, I'd like to suggest the following 2 options:
