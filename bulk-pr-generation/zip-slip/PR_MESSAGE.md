@@ -15,7 +15,7 @@ Overwriting certain files/directories could allow an attacker to achieve remote 
 
 ### Why?
 
-The best description of Zip-Slip can be found in the white paper published by Snky: [Zip Slip Vulnerability](https://snyk.io/research/zip-slip-vulnerability)
+The best description of Zip-Slip can be found in the white paper published by Snyk: [Zip Slip Vulnerability](https://snyk.io/research/zip-slip-vulnerability)
 
 #### But I had a guard in place, why wasn't it sufficient?
 
