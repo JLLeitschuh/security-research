@@ -4,6 +4,8 @@
 
 This pull request fixes a partial-path traversal vulnerability due to an insufficient path traversal guard.
 
+Even if you deem, as the maintainer of this project, this is not nessasarily fixing a security vulnerability, it is still a valid security hardening.
+
 ## Preamble
 
 ### Impact
