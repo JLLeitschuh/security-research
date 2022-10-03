@@ -363,7 +363,7 @@ def main():
             print("Commit job COMPLETED")
             break
         time.sleep(5)
-    print("Done!")
+    print(f'Campaign {campaign.name} completed!')
 
 
 if __name__ == "__main__":
