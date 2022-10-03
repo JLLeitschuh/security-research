@@ -1,5 +1,6 @@
 import argparse
 import base64
+import json
 import os
 import time
 from dataclasses import dataclass
@@ -40,7 +41,7 @@ class Campaign:
         pr_message = Campaign._load_file_contents_as_title_and_body(f"{name}/pr_message.md")
         return Campaign(
             name=name,
-            recipe_id=Campaign._load_file_contents(f"{name}/recipe.txt").lstrip(),
+            recipe_id=Campaign._load_file_contents(f"{name}/recipe.txt").strip(),
             branch=Campaign._load_file_contents(f"{name}/branch_name.txt").strip(),
             commit_title=commit[0],
             commit_extended=commit[1],
@@ -183,7 +184,7 @@ def query_recipe_run_results(recipe_run_id: str) -> List[Dict[str, Any]]:
     results: List[Any] = []
     while True:
         page = query_recipient_run_results_page(recipe_run_id, after)
-        results.extend([edge["node"] for edge in page["edges"]])
+        results.extend([edge["node"]["repository"] for edge in page["edges"]])
         if not page["pageInfo"]["hasNextPage"]:
             break
         after = page["pageInfo"]["endCursor"]
@@ -224,8 +225,8 @@ def fork_and_pull_request(recipe_id: str,
             "branchName": campaign.branch,
             "gpgKey": {
                 "passphrase": gpg_key_config.key_passphrase,
-                "privateKey": gpg_key_config.key_private_key,
-                "publicKey": gpg_key_config.key_public_key
+                "privateKey": gpg_key_config.key_private_key.replace("\\n", "\n"),
+                "publicKey": gpg_key_config.key_public_key.replace("\\n", "\n")
             },
             "message": campaign.commit_title,
             "extendedMessage": base64.b64encode(campaign.commit_extended.encode()).decode(),
@@ -237,6 +238,7 @@ def fork_and_pull_request(recipe_id: str,
         "pullRequestBody": base64.b64encode(campaign.pr_body.encode()).decode()
     }
     # Execute the query on the transport
+    # print(json.dumps(params, indent=4))
     result = client.execute(fork_and_pull_request_query, variable_values=params)
     print(result)
     return result["forkAndPullRequest"]["id"]
@@ -290,22 +292,24 @@ def query_commit_job_status(commit_job_id: str) -> str:
             params["after"] = str(after)
         result = client.execute(commit_job_status_query, variable_values=params)
         print(result)
-        return result["commitJob"]["commits"]
+        return result
 
     after = None
     results: List[Any] = []
     while True:
-        page = query_commit_job_status_page(after)
+        commit_status = query_commit_job_status_page(after)["commitJob"]
+        page = commit_status["commits"]
         results.extend([edge["node"] for edge in page["edges"]])
         if not page["pageInfo"]["hasNextPage"]:
             break
         after = page["pageInfo"]["endCursor"]
-
-    summary_results = page["summaryResults"]
+    summary_results = commit_status["summaryResults"]
     print(f"Summary results: {summary_results}")
-    if summary_results["failedCount"] + summary_results["noChangeCount"] + summary_results["successfulCount"] < \
+    if summary_results["count"] == commit_status["completed"]:
+        return "COMPLETED"
+    elif summary_results["failedCount"] + summary_results["noChangeCount"] + summary_results["successfulCount"] < \
             summary_results["count"]:
-        return "FAILED"
+        return "RUNNING"
     else:
         return "COMPLETED"
 
@@ -330,30 +334,36 @@ def main():
     args = parser.parse_args()
     campaign = Campaign.create(args.campaign_id)
 
-    # run_id = run_security_fix(campaign.recipe_id)
-    #
-    # while True:
-    #     state = query_recipe_run_status(run_id)
-    #     print(f"Recipe {run_id} state: {state}")
-    #     if state == "FINISHED":
-    #         print("Recipe run FINISHED")
-    #         break
-    #     elif state == "CANCELED":
-    #         print("Recipe run CANCELED")
-    #         break
-    #     time.sleep(5)
+    print(f"Running campaign {campaign.name}...")
+    run_id = run_security_fix(campaign.recipe_id)
 
-    repositories = query_recipe_run_results("JuLCF")
+    print(f"Waiting for recipe run {run_id} to complete...")
+    while True:
+        state = query_recipe_run_status(run_id)
+        print(f"Recipe {run_id} state: {state}")
+        if state == "FINISHED":
+            print("Recipe run FINISHED")
+            break
+        elif state == "CANCELED":
+            print("Recipe run CANCELED")
+            break
+        time.sleep(5)
+
+    print(f"Querying recipe run {run_id} results...")
+    repositories = query_recipe_run_results(run_id)
     print(repositories)
     print(len(repositories))
 
-    commit_id = fork_and_pull_request("JuLCF", campaign, gpg_key_config, repositories)
+    print(f"Forking and creating pull requests for campaign {campaign.name}...")
+    commit_id = fork_and_pull_request(run_id, campaign, gpg_key_config, repositories)
+    print(f"Waiting for commit job {commit_id} to complete...")
     while True:
         status = query_commit_job_status(commit_id)
         if status == "COMPLETED":
             print("Commit job COMPLETED")
             break
         time.sleep(5)
+    print("Done!")
 
 
 if __name__ == "__main__":
