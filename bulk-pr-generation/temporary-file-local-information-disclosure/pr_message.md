@@ -8,7 +8,8 @@ This pull request fixes a Temporary File Information Disclosure Vulnerability, w
 
 The system temporary directory is shared between all users on most unix-like systems (not MacOS, or Windows). Thus, code interacting with the system temporary directory must be careful about file interactions in this directory, and must ensure that the correct file posix permissions are set.
 
-This PR was generated because a call to `File.createTempFile(..)` was detected in this repository in a way that makes this project vulnerable.
+This PR was generated because a call to `File.createTempFile(..)` was detected in this repository in a way that makes this project vulnerable to local information disclosure.
+With the default uname configuration, `File.createTempFile(..)` creates a file with the permissions `-rw-r--r--`. This means that any other user on the system can read the contents of this file.
 
 ### Impact
 
@@ -30,6 +31,7 @@ File tmpDir = Files.createTempFile("temp dir").toFile();
 ```
 
 The API both creates the file securely, ie. with a random, non-conflicting name, with file permissions that only allow the currently executing user to read or write the contents of this file.
+By default, `Files.createTempFile("temp dir")` will create a file with the permissions `-rw-------`, which only allows the user that created the file to view/write the file contents.
 
 # :arrow_right: Vulnerability Disclosure :arrow_left:
 
