@@ -1,0 +1,15 @@
+vuln-fix: Temporary File Information Disclosure
+
+This fixes temporary file information disclosure vulnerability due to the use
+of the vulnerable `File.createTempFile()` method. The vulnerability is fixed by
+using the `Files.createTempFile()` method which sets the correct posix permissions.
+
+Weakness: CWE-377: Insecure Temporary File
+Severity: Medium
+CVSSS: 5.5
+Detection: CodeQL & OpenRewrite (https://public.moderne.io/recipes/org.openrewrite.java.security.SecureTempFileCreation)
+
+Reported-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+Signed-off-by: Jonathan Leitschuh <Jonathan.Leitschuh@gmail.com>
+
+Bug-tracker: https://github.com/JLLeitschuh/security-research/issues/18
