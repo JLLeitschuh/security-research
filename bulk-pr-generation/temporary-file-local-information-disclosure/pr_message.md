@@ -2,7 +2,9 @@
 
 # Security Vulnerability Fix
 
-This pull request fixes a Temporary File Information Disclosure Vulnerability, which existed in this project.
+This pull request fixes a Temporary File Information Disclosure Vulnerability, which may exist in this project.
+
+Even if you deem, as the maintainer of this project, this is not necessarily fixing a security vulnerability, it is still, most likely, a valid security hardening.
 
 ## Preamble
 
