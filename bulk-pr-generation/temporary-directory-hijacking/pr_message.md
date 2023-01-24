@@ -42,7 +42,7 @@ tmpDir.mkdirs(); // This method returns 'false' because it was unable to create 
 
 ## Temporary Directory Information Disclosure
 
-This vulnerability exists because, although the return values of `file.mkdir()` or `file.mkdirs()` are correctly checked, the permissions of the directory that is created follows the default system `uname` settings. Thus, the directory is created with everyone-readable permissions. As such, any files/directories written into this directory are viewable by all other local users on the system.
+This vulnerability exists because, although the return values of `file.mkdir()` or `file.mkdirs()` are correctly checked, the permissions of the directory that is created follows the default system umask configuration. Thus, the directory is created with everyone-readable permissions. As such, any files/directories written into this directory are viewable by all other local users on the system.
 
 ```java
 File tmpDir = File.createTempFile("temp", ".dir");

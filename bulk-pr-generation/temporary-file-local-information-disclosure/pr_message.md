@@ -11,7 +11,7 @@ Even if you deem, as the maintainer of this project, this is not necessarily fix
 The system temporary directory is shared between all users on most unix-like systems (not MacOS, or Windows). Thus, code interacting with the system temporary directory must be careful about file interactions in this directory, and must ensure that the correct file posix permissions are set.
 
 This PR was generated because a call to `File.createTempFile(..)` was detected in this repository in a way that makes this project vulnerable to local information disclosure.
-With the default uname configuration, `File.createTempFile(..)` creates a file with the permissions `-rw-r--r--`. This means that any other user on the system can read the contents of this file.
+With the default umask configuration, `File.createTempFile(..)` creates a file with the permissions `-rw-r--r--`. This means that any other user on the system can read the contents of this file.
 
 ### Impact
 
