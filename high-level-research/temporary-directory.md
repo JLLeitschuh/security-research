@@ -69,7 +69,7 @@ File tempVuln = File.createTempFile("random", "file", null); // File has permiss
 ```java
 File tempDir = new File(System.getProperty("java.io.tmpdir"));
 File tempVuln = File.createTempFile("random", "file", tempDir); // File has permissions `-rw-r--r--`
-// temVuln contents are viewable by all other users
+// tempVuln contents are viewable by all other users
 ```
 ```java
 File tempDirChildVuln = new File(System.getProperty("java.io.tmpdir"), "/child.txt");
