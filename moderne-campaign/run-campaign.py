@@ -1,13 +1,12 @@
 import argparse
 import base64
-import json
 import os
 import time
 from dataclasses import dataclass
-from typing import List, Dict, Any, Tuple
 
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
+from typing import List, Dict, Any, Tuple
 
 moderne_api_token = os.getenv("MODERNE_API_TOKEN")
 if not moderne_api_token:
@@ -35,14 +34,32 @@ class Campaign:
     pr_title: str
     pr_body: str
 
-    @staticmethod
-    def create(name: str) -> 'Campaign':
-        commit = Campaign._load_file_contents_as_title_and_body(f"{name}/commit.txt")
-        pr_message = Campaign._load_file_contents_as_title_and_body(f"{name}/pr_message.md")
+    def get_yaml(self) -> str:
+        # language=yaml
+        return f"""\
+        type: specs.openrewrite.org/v1beta/recipe
+        name: org.jlleitschuh.research.SecurityFixRecipe
+        displayName: Apply `{self.recipe_id}`
+        description: Applies the `{self.recipe_id}` to non-test sources first, if changes are made, then apply to all sources.
+        applicability:
+          anySource:
+            - org.openrewrite.java.search.IsLikelyNotTest
+            - {self.recipe_id}
+        recipeList:
+          - {self.recipe_id}
+        """
+
+    def get_yaml_base_64(self) -> str:
+        return base64.b64encode(self.get_yaml().encode('utf-8')).decode('utf-8')
+
+    @classmethod
+    def create(cls, name: str) -> 'Campaign':
+        commit = cls._load_file_contents_as_title_and_body(f"{name}/commit.txt")
+        pr_message = cls._load_file_contents_as_title_and_body(f"{name}/pr_message.md")
         return Campaign(
             name=name,
-            recipe_id=Campaign._load_file_contents(f"{name}/recipe.txt").strip(),
-            branch=Campaign._load_file_contents(f"{name}/branch_name.txt").strip(),
+            recipe_id=cls._load_file_contents(f"{name}/recipe.txt").strip(),
+            branch=cls._load_file_contents(f"{name}/branch_name.txt").strip(),
             commit_title=commit[0],
             commit_extended=commit[1],
             pr_title=pr_message[0],
@@ -72,12 +89,12 @@ class GpgKeyConfig:
     key_private_key: str
     key_public_key: str
 
-    @staticmethod
-    def load() -> 'GpgKeyConfig':
+    @classmethod
+    def load(cls) -> 'GpgKeyConfig':
         return GpgKeyConfig(
-            key_passphrase=GpgKeyConfig._load_env("GPG_KEY_PASSPHRASE"),
-            key_private_key=GpgKeyConfig._load_env("GPG_KEY_PRIVATE_KEY"),
-            key_public_key=GpgKeyConfig._load_env("GPG_KEY_PUBLIC_KEY")
+            key_passphrase=cls._load_env("GPG_KEY_PASSPHRASE"),
+            key_private_key=cls._load_env("GPG_KEY_PRIVATE_KEY"),
+            key_public_key=cls._load_env("GPG_KEY_PUBLIC_KEY")
         )
 
     @staticmethod
@@ -88,12 +105,12 @@ class GpgKeyConfig:
         return env
 
 
-def run_security_fix(recipe_id: str) -> str:
+def run_security_fix(organizationId: str, campaign: Campaign) -> str:
     run_fix_query = gql(
         # language=GraphQL
         """
-        mutation runSecurityFix($run: RecipeRunInput!) {
-          runRecipe(run: $run) {
+        mutation runSecurityFix($organizationId: ID, $yaml: Base64!) {
+          runYamlRecipe(organizationId: $organizationId, yaml: $yaml) {
             id
             start
           }
@@ -102,16 +119,13 @@ def run_security_fix(recipe_id: str) -> str:
     )
 
     params = {
-        "run": {
-            "recipe": {
-                "id": recipe_id
-            }
-        }
+        "organizationId": organizationId,
+        "yaml": campaign.get_yaml_base_64()
     }
     # Execute the query on the transport
     result = client.execute(run_fix_query, variable_values=params)
     print(result)
-    return result["runRecipe"]["id"]
+    return result["runYamlRecipe"]["id"]
 
 
 def query_recipe_run_status(recipe_run_id: str) -> str:
@@ -144,7 +158,7 @@ def query_recipe_run_status(recipe_run_id: str) -> str:
 
 
 def query_recipe_run_results(recipe_run_id: str) -> List[Dict[str, Any]]:
-    def query_recipient_run_results_page(recipe_run_id: str, after: int) -> dict:
+    def query_recipient_run_results_page(after: int) -> dict:
         recipe_run_results = gql(
             # language=GraphQL
             """
@@ -180,14 +194,14 @@ def query_recipe_run_results(recipe_run_id: str) -> List[Dict[str, Any]]:
         result = client.execute(recipe_run_results, variable_values=params)
         return result["recipeRun"]["summaryResultsPages"]
 
-    after = -1
+    next_after = -1
     results: List[Any] = []
     while True:
-        page = query_recipient_run_results_page(recipe_run_id, after)
+        page = query_recipient_run_results_page(next_after)
         results.extend([edge["node"]["repository"] for edge in page["edges"]])
         if not page["pageInfo"]["hasNextPage"]:
             break
-        after = page["pageInfo"]["endCursor"]
+        next_after = page["pageInfo"]["endCursor"]
 
     return results
 
@@ -294,15 +308,15 @@ def query_commit_job_status(commit_job_id: str) -> str:
         print(result)
         return result
 
-    after = None
+    next_after = None
     results: List[Any] = []
     while True:
-        commit_status = query_commit_job_status_page(after)["commitJob"]
+        commit_status = query_commit_job_status_page(next_after)["commitJob"]
         page = commit_status["commits"]
         results.extend([edge["node"] for edge in page["edges"]])
         if not page["pageInfo"]["hasNextPage"]:
             break
-        after = page["pageInfo"]["endCursor"]
+        next_after = page["pageInfo"]["endCursor"]
     summary_results = commit_status["summaryResults"]
     print(f"Summary results: {summary_results}")
     if summary_results["count"] == commit_status["completed"]:
@@ -330,12 +344,23 @@ def main():
                         help='The campaign to to run. Must match the name of the directory in `bulk-pr-generation`.'
                              'For example, if the campaign is in `bulk-pr-generation/fix-foo`, '
                              'then the campaign ID is `fix-foo`.')
+    parser.add_argument('--moderne-organization',
+                        type=str,
+                        default='Default',
+                        help='The Moderne SaaS organization ID to run the campaign under. Defaults to `Default`.')
+    parser.add_argument('--dry-run',
+                        action='store_true',
+                        help='If set, the script will not create any pull requests.')
 
     args = parser.parse_args()
+
+    if args.dry_run:
+        print("Dry run enabled. No pull requests will be created!")
+
     campaign = Campaign.create(args.campaign_id)
 
     print(f"Running campaign {campaign.name}...")
-    run_id = run_security_fix(campaign.recipe_id)
+    run_id = run_security_fix(args.moderne_organization, campaign)
 
     print(f"Waiting for recipe run {run_id} to complete...")
     while True:
@@ -353,6 +378,10 @@ def main():
     repositories = query_recipe_run_results(run_id)
     print(repositories)
     print(len(repositories))
+
+    if args.dry_run:
+        print("Dry run enabled. Exiting.")
+        exit(0)
 
     print(f"Forking and creating pull requests for campaign {campaign.name}...")
     commit_id = fork_and_pull_request(run_id, campaign, gpg_key_config, repositories)
