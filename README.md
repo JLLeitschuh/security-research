@@ -27,4 +27,4 @@ However, this channel provides an easy way for me to enforce my disclosure polic
 
 ## My Disclosure Policy
 
-**My vulnerability disclosure follows Google's [90-day vulnerability disclosure policy](https://www.google.com/about/appsecurity/) (I'm not an employee of Google, I just like their policy). Full disclosure will occur either at the end of the 90-day deadline or whenever a patch is made widely available, whichever occurs first.**
+**My vulnerability disclosure follows the OpenSource Security Foundation (OpenSSF) Outbound Vulnerability Disclosure Policy [90-day vulnerability disclosure policy](https://openssf.org/about/vulnerability-disclosure-policy/). Full disclosure will occur either at the end of the 90-day deadline or whenever a patch is made widely available, whichever occurs first.**
