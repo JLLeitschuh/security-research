@@ -27,4 +27,4 @@ However, this channel provides an easy way for me to enforce my disclosure polic
 
 ## My Disclosure Policy
 
-**My vulnerability disclosure follows the OpenSource Security Foundation (OpenSSF) Outbound Vulnerability Disclosure Policy [90-day vulnerability disclosure policy](https://openssf.org/about/vulnerability-disclosure-policy/). Full disclosure will occur either at the end of the 90-day deadline or whenever a patch is made widely available, whichever occurs first.**
+**My vulnerability disclosure follows the [Open Source Security Foundation (OpenSSF) Outbound Vulnerability Disclosure Policy](https://openssf.org/about/vulnerability-disclosure-policy/). In short, it is a 90-day vulnerability disclosure policy. Full disclosure will occur either at the end of the 90-day deadline or whenever a patch is made widely available, whichever occurs first.**
