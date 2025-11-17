@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node --env-file=.env dist/cli.js",
-    "action": "node --env-file=.env dist/action.js",
+    "action": "node dist/action.js",
     "dev": "tsc --watch"
   },
   "bin": {

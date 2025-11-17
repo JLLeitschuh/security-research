@@ -12,7 +12,7 @@ async function main() {
   const advisoryUrl = process.env.INPUT_ADVISORY_URL;
   const targetRepo = process.env.INPUT_TARGET_REPO || "JLLeitschuh/security-research";
   const mode = process.env.INPUT_MODE || "recreate";
-  const githubToken = process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN;
+  const githubToken = process.env.GHSA_GITHUB_TOKEN || process.env.INPUT_GHSA_GITHUB_TOKEN;
 
   if (!advisoryUrl) {
     console.error("Error: advisory_url input is required");
@@ -20,7 +20,7 @@ async function main() {
   }
 
   if (!githubToken) {
-    console.error("Error: GITHUB_TOKEN secret is required");
+    console.error("Error: GHSA_GITHUB_TOKEN secret is required");
     process.exit(1);
   }
 

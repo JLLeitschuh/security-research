@@ -26,9 +26,9 @@ program
   .argument("<advisory-url>", "URL of the GitHub Security Advisory")
   .action(async (advisoryUrl: string) => {
     try {
-      const token = process.env.GITHUB_TOKEN;
+      const token = process.env.GHSA_GITHUB_TOKEN;
       if (!token) {
-        console.error("Error: GITHUB_TOKEN environment variable is not set");
+        console.error("Error: GHSA_GITHUB_TOKEN environment variable is not set");
         process.exit(1);
       }
 
@@ -139,9 +139,9 @@ program
   )
   .action(async (advisoryUrl: string, options: { targetRepo: string }) => {
     try {
-      const token = process.env.GITHUB_TOKEN;
+      const token = process.env.GHSA_GITHUB_TOKEN;
       if (!token) {
-        console.error("Error: GITHUB_TOKEN environment variable is not set");
+        console.error("Error: GHSA_GITHUB_TOKEN environment variable is not set");
         process.exit(1);
       }
 
@@ -207,9 +207,9 @@ program
   .argument("<target-advisory-url>", "URL of the target GitHub Security Advisory to overwrite")
   .action(async (sourceAdvisoryUrl: string, targetAdvisoryUrl: string) => {
     try {
-      const token = process.env.GITHUB_TOKEN;
+      const token = process.env.GHSA_GITHUB_TOKEN;
       if (!token) {
-        console.error("Error: GITHUB_TOKEN environment variable is not set");
+        console.error("Error: GHSA_GITHUB_TOKEN environment variable is not set");
         process.exit(1);
       }
 

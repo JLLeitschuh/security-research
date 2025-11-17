@@ -47,7 +47,7 @@ jobs:
       - name: Run GHSA extractor
         working-directory: ./ghsa-extractor
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHSA_GITHUB_TOKEN: ${{ secrets.GHSA_GITHUB_TOKEN }}
           INPUT_ADVISORY_URL: ${{ inputs.advisory_url }}
           INPUT_TARGET_REPO: ${{ inputs.target_repo }}
           INPUT_MODE: ${{ inputs.mode }}

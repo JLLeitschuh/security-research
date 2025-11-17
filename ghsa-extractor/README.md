@@ -44,7 +44,7 @@ Copy the `.env.template` file to `.env` and add your GitHub token:
 cp .env.template .env
 ```
 
-Edit `.env` and replace `your_github_token_here` with your actual GitHub Personal Access Token.
+Edit `.env` and replace `your_github_token_here` with your actual GitHub Personal Access Token (set as `GHSA_GITHUB_TOKEN`).
 
 ## Usage
 
@@ -93,9 +93,9 @@ You can use this tool via GitHub Actions by running the `extract-ghsa` workflow 
 
 #### Secrets
 
-- `GITHUB_TOKEN` (required): A GitHub Personal Access Token with the `repository_advisories:write` scope. 
-  - The workflow uses `secrets.GITHUB_TOKEN` which is the default GitHub Actions token. 
-  - If the default token doesn't have sufficient permissions, you may need to add your own PAT as a repository secret and update the workflow to use it instead.
+- `GHSA_GITHUB_TOKEN` (required): A GitHub Personal Access Token with the `repository_advisories:write` scope. 
+  - Add this as a repository secret in your GitHub repository settings.
+  - The workflow expects this secret to be named `GHSA_GITHUB_TOKEN`.
 
 #### Example Workflow Usage
 
