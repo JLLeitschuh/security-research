@@ -12,9 +12,11 @@ moderne_api_token = os.getenv("MODERNE_API_TOKEN")
 if not moderne_api_token:
     raise Exception("MODERNE_API_TOKEN environment variable is not set")
 
+DOMAIN = "public.moderne.io"
+
 # Select your transport with a defined url endpoint
 transport = AIOHTTPTransport(
-    url="https://api.public.moderne.io/",
+    url=f"https://api.{DOMAIN}/",
     headers={
         "Authorization": f'Bearer {moderne_api_token}'
     }
@@ -363,6 +365,7 @@ def main():
     run_id = run_security_fix(args.moderne_organization, campaign)
 
     print(f"Waiting for recipe run {run_id} to complete...")
+    print(f"View live on Moderne https://{DOMAIN}/results/{run_id}")
     while True:
         state = query_recipe_run_status(run_id)
         print(f"Recipe {run_id} state: {state}")
