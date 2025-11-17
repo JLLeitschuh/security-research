@@ -1,2 +1,7 @@
 .idea
 dist-newstyle
+
+# GHSA Extractor
+ghsa-extractor/.env
+ghsa-extractor/node_modules/
+ghsa-extractor/dist/

@@ -1,0 +1,39 @@
+{
+  "name": "ghsa-extractor",
+  "version": "1.0.0",
+  "description": "Tool to extract and recreate GitHub Security Advisories",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --env-file=.env dist/cli.js",
+    "action": "node --env-file=.env dist/action.js",
+    "dev": "tsc --watch"
+  },
+  "bin": {
+    "ghsa-extractor": "./dist/cli.js"
+  },
+  "keywords": [
+    "github",
+    "security",
+    "advisory",
+    "ghsa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^20.0.2",
+    "commander": "^11.1.0",
+    "marked": "^11.1.1",
+    "marked-terminal": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/marked-terminal": "^6.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.6.0"
+  }
+}
+

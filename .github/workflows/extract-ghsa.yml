@@ -1,0 +1,64 @@
+name: Extract GHSA
+
+on:
+  workflow_dispatch:
+    inputs:
+      advisory_url:
+        description: 'URL of the GitHub Security Advisory to extract'
+        required: true
+        type: string
+      target_repo:
+        description: 'Target repository to create the advisory in (owner/repo)'
+        required: false
+        type: string
+        default: 'JLLeitschuh/security-research'
+      mode:
+        description: 'Mode: fetch or recreate'
+        required: false
+        type: choice
+        options:
+          - fetch
+          - recreate
+        default: 'recreate'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Install dependencies
+        working-directory: ./ghsa-extractor
+        run: npm ci
+
+      - name: Build TypeScript
+        working-directory: ./ghsa-extractor
+        run: npm run build
+
+      - name: Run GHSA extractor
+        working-directory: ./ghsa-extractor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_ADVISORY_URL: ${{ inputs.advisory_url }}
+          INPUT_TARGET_REPO: ${{ inputs.target_repo }}
+          INPUT_MODE: ${{ inputs.mode }}
+        run: npm run action
+
+      - name: Display outputs
+        if: inputs.mode == 'recreate'
+        working-directory: ./ghsa-extractor
+        run: |
+          if [ -f "$GITHUB_OUTPUT" ]; then
+            echo "Advisory creation outputs:"
+            cat "$GITHUB_OUTPUT"
+          fi
+
